@@ -6,15 +6,17 @@ const readFile = util.promisify(fs.readFile);
 
 interface IGraphOptions {
   vertices: number;
-  edges: string[][];
+  edges: Vertex[][];
 }
 
+type Vertex = string;
+
 interface IAdjacencyList {
-  [key: string]: Set<string>
+  [key: string]: Set<String>
 }
 
 interface IVertexCallback {
-  (vertex: string): void;
+  (vertex: Vertex): void;
 }
 
 export class Graph {
@@ -40,7 +42,7 @@ export class Graph {
   public adjacencyList: IAdjacencyList;
 
   // Adds edge between vertices
-  public addEdge(v: string, w: string): void {
+  public addEdge(v: Vertex, w: Vertex): void {
     this.adjacencyList[v].add(w);
     this.adjacencyList[w].add(v);
   }
@@ -66,7 +68,7 @@ export class Graph {
   }
 
   // Iterate over vertices adjacent to v
-  public adj(v: string, cb: IVertexCallback): void {
+  public forEachAdjacent(v: Vertex, cb: IVertexCallback): void {
     Array.from(this.adjacencyList[v]).forEach(cb);
   }
 

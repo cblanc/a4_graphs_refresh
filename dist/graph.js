@@ -43,7 +43,7 @@ class Graph {
         this.vertices().forEach(cb);
     }
     // Iterate over vertices adjacent to v
-    adj(v, cb) {
+    forEachAdjacent(v, cb) {
         Array.from(this.adjacencyList[v]).forEach(cb);
     }
     toString() {
